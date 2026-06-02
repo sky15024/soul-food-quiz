@@ -92,11 +92,11 @@ function calculateResult() {
   window.__pendingResultKey = topPower;
   const res = window.__getResult ? window.__getResult(topPower) : null;
   if(res) {
-    renderResult(res);
+    renderResult(res, true);
   }
 }
 
-function renderResult(res) {
+function renderResult(res, showAd = false) {
   document.getElementById('res-title').innerHTML = res.title;
   document.getElementById('res-subtitle').innerHTML = res.subtitle;
   document.getElementById('res-desc').innerHTML = res.desc;
@@ -111,12 +111,14 @@ function renderResult(res) {
   const match1 = window.__getResult(res.match1);
   if (match1) {
     document.getElementById('match1-img').src = match1.image;
+    document.getElementById('match1-img').style.display = 'block';
     document.getElementById('match1-title').textContent = match1.title;
     document.getElementById('match1-reason').textContent = res.match1_desc;
   }
   const match2 = window.__getResult(res.match2);
   if (match2) {
     document.getElementById('match2-img').src = match2.image;
+    document.getElementById('match2-img').style.display = 'block';
     document.getElementById('match2-title').textContent = match2.title;
     document.getElementById('match2-reason').textContent = res.match2_desc;
   }
@@ -128,7 +130,7 @@ function renderResult(res) {
   }, 100);
 
   setTimeout(() => {
-    if (typeof showAdInterstitial === 'function') {
+    if (showAd && typeof showAdInterstitial === 'function') {
       showAdInterstitial();
     }
   }, 3000);
@@ -182,11 +184,11 @@ function drawRadar(scores) {
     
     // Draw labels
     ctx.fillStyle = '#7a6650';
-    ctx.font = 'bold 14px "Quicksand", "微軟正黑體", sans-serif';
+    ctx.font = 'bold 18px "Quicksand", "微軟正黑體", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    const lx = cx + Math.cos(angle) * (radius + 20);
-    const ly = cy + Math.sin(angle) * (radius + 20);
+    const lx = cx + Math.cos(angle) * (radius + 25);
+    const ly = cy + Math.sin(angle) * (radius + 25);
     ctx.fillText(labels[i], lx, ly);
   }
 
@@ -294,11 +296,20 @@ function openUrl(url) { window.open(url, '_blank'); }
 
 function showShareToast(msg) {
   let toast = document.getElementById('share-toast');
-  if (!toast) return;
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'share-toast';
+    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(13,13,26,0.95);border:1px solid rgba(167,139,250,0.3);color:#fff;padding:14px 24px;border-radius:16px;font-size:14px;z-index:9999;opacity:0;transition:all 0.3s;backdrop-filter:blur(12px);text-align:center;max-width:320px;';
+    document.body.appendChild(toast);
+  }
+  // Force a reflow so the transition will trigger if it was just added
+  void toast.offsetWidth;
   toast.textContent = msg;
   toast.style.opacity = '1';
   toast.style.transform = 'translateX(-50%) translateY(0)';
-  setTimeout(() => {
+  
+  if (toast._timer) clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
     toast.style.opacity = '0';
     toast.style.transform = 'translateX(-50%) translateY(20px)';
   }, 4000);
@@ -315,6 +326,17 @@ function shareTo(platform) {
     copyTextFallback(text + '\n' + url).then(() => {
       const toastText = _shareUI ? _shareUI.copy_toast : '✓ 已複製！';
       showShareToast(toastText);
+    });
+    return;
+  }
+
+  if (platform === 'ig') {
+    copyTextFallback(text + ' ' + url).then(() => {
+      showShareToast('📸 文字已複製！請到 IG 限動或貼文手動貼上');
+      setTimeout(() => {
+        if (isMobile()) { window.location.href = 'instagram://app'; }
+        else { openUrl('https://www.instagram.com/'); }
+      }, 600);
     });
     return;
   }

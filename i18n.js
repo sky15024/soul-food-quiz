@@ -84,8 +84,8 @@ window.__i18n = {
         options: [
           { label: 'Boiling 100°C: Passionate and warming everyone like the sun.', scores: { hotpot: 3, fried_chicken: 3 } },
           { label: 'Warm 37°C: Friendly, easygoing, and comfortable.', scores: { tofu_pudding: 3, beef_noodles: 2, braised_pork_rice: 2 } },
-          { label: 'Cool or crisp on the outside: A bit mysterious, slow to warm up.', scores: { creme_brulee: 3, coffee: 3 } },
-          { label: 'Adaptable room temp: Flexible and blends in anywhere.', scores: { boba_tea: 3, skewers: 3, soup_dumpling: 2 } }
+          { label: 'Cool 15°C: A bit mysterious, slow to warm up, with a touch of crisp aloofness.', scores: { creme_brulee: 3, coffee: 3 } },
+          { label: 'Room Temp 26°C: Flexible, adaptable, and blends in anywhere.', scores: { boba_tea: 3, skewers: 3, soup_dumpling: 2 } }
         ]
       },
       {

@@ -6,7 +6,7 @@ const questions = [
       { label: '絕對是熱場擔當！有我的地方就有笑聲', scores: { hotpot: 3, fried_chicken: 3 } },
       { label: '游移在各個小圈子間，隨性自在聊幾句', scores: { boba_tea: 3, skewers: 3 } },
       { label: '溫柔的聆聽者，默默遞紙巾倒水', scores: { tofu_pudding: 3, beef_noodles: 2 } },
-      { label: '默默品味美食，在角落冷眼旁觀一切', scores: { creme_brulee: 3, coffee: 3, braised_pork_rice: 3 } }
+      { label: '默默品味美食，在角落觀察一切', scores: { creme_brulee: 3, coffee: 3, braised_pork_rice: 3 } }
     ]
   },
   {
@@ -25,8 +25,8 @@ const questions = [
     options: [
       { label: '滾燙的 100°C：熱情奔放，像太陽一樣溫暖大家', scores: { hotpot: 3, fried_chicken: 3 } },
       { label: '溫暖的 37°C：親切好相處，沒有距離感的舒適感', scores: { tofu_pudding: 3, beef_noodles: 2, braised_pork_rice: 2 } },
-      { label: '外表帶有防備的微涼或微脆：有點神祕、慢熱，帶有一絲孤傲', scores: { creme_brulee: 3, coffee: 3 } },
-      { label: '隨性變化的常溫：適應力強，隨時能與任何人打成一片', scores: { boba_tea: 3, skewers: 3, soup_dumpling: 2 } }
+      { label: '微涼的 15°C：有點神祕、慢熱，帶有一絲孤傲與防備', scores: { creme_brulee: 3, coffee: 3 } },
+      { label: '隨性的 26°C 常溫：適應力強，隨時能與任何人打成一片', scores: { boba_tea: 3, skewers: 3, soup_dumpling: 2 } }
     ]
   },
   {
